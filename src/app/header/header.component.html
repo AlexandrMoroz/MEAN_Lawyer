@@ -1,0 +1,10 @@
+<div class="d-flex flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm justify-content-end">
+  <img src="../assets/logo.svg" class="logo" alt="Главная"/>
+  <div class="spacer"></div>
+    <nav class="my-2 my-md-0 mr-md-3 ">
+      <a class="p-2 text-dark" [routerLink]="['']">Главная</a>
+      <a *ngIf="authService.isLogged()" class=" button  " [routerLink]="['dashbord']">Кабинет пользователя</a>
+      <a *ngIf="!authService.isLogged()" class=" button " [routerLink]="['auth']">Войти</a>
+      <a *ngIf="!authService.isLogged()" class=" button " [routerLink]="['reg']">Регистрация</a>
+    </nav>  
+  </div>

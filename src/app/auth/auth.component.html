@@ -1,0 +1,6 @@
+<h1>Форма Авторизации</h1>
+<form (submit)="userLoginClick()" class="form-group">
+    <input type="text" [(ngModel)]="login" name="login" placeholder="Введите логин"class="form-control form-group"> 
+    <input type="password"  [(ngModel)]="password" name="password" placeholder="Введите пароль"class="form-control form-group">  
+    <button class="btn btn-success" type="submit">Зарегистрироваться</button> 
+</form>

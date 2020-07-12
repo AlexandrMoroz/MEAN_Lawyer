@@ -1,0 +1,51 @@
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+
+      <ng-template matStepLabel>Fill out your name</ng-template>
+
+        <div class="question-container">
+          <ng-container >
+                  <div class="question">
+                  <h2> {{ currentNode.description }}</h2>
+                  </div>
+                  <div class="answers">
+                  <div *ngFor="let item of currentNode.childrens ">
+                      <div *ngIf="item.rule==null">
+                          <button class="button"  (click)="answerSubmit(item,null)"> Далее</button>
+                      </div>
+                      <div *ngIf="item.rule!=null">
+                          <button *ngIf="item.link!=undefined" class="button" (click)="answerSubmit(item,item.link)">{{item.rule}}</button>
+                          <button class="button" (click)="answerSubmit(item,null)">{{item.rule}}</button>
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+      </div>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+
+
+        

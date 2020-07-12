@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="d-flex form-inline flex-row mt-5 mb-3 ml-3">
+    <h1>Постановление</h1>
+    <form class="ml-3 search-form">
+      
+      <input class=" search-input" 
+      [ngModelOptions]="{standalone: true}" 
+      [(ngModel)]="decreeSearchText" 
+      type="text" placeholder="Поиск" aria-label="Search">
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
+  </div>
+  <div class="slider">
+  <div class="d-flex flex-row ">
+    <swiper class="carousel" [config]="swipeConfig" >     
+       <div *ngFor="let item of (decrees|searchPipe:decreeSearchText)" class="slide">
+        <a [routerLink]="['protocol', item.name]">
+        <div class="card ml-3" >
+          <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.description}}</p>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div *ngIf="(decrees | searchPipe:decreeSearchText).length == 0">
+        <h2>Не найдено</h2> 
+      </div>
+    </swiper>
+  </div>
+</div>
+
+<div class="slider">
+  <div class="d-flex form-inline flex-row mt-5 mb-3 ml-3">
+    <h1 class="">Протокол</h1>
+    <form class="ml-3 search-form ">
+      <input class="search-input" 
+      type="text"
+      placeholder="Поиск"
+      aria-label="Search" 
+      [(ngModel)]="protocolSearchText" 
+      [ngModelOptions]="{standalone: true}" 
+      >    
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
+  </div>
+  <div class="d-flex flex-row m-auto ">
+    <swiper class="carousel" [config]="swipeConfig">
+      <div ngxSlickItem *ngFor="let item of (protocols|searchPipe:protocolSearchText)  " class="slide">
+        <div class="card ml-3">
+          <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(protocols | searchPipe:protocolSearchText).length  == 0">
+        <h2>Не найдено</h2> 
+      </div>
+    </swiper>
+  </div>
+</div>
+</div>
