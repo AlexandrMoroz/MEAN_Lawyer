@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TreeNode, nodeList } from '../shared/treemodel';
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-protocol',
   templateUrl: './protocol.component.html',
@@ -33,15 +34,24 @@ export class ProtocolComponent implements OnInit {
     });
   }
   
-  public answerSubmit(node:TreeNode,navigateLink:string){
+  public Next(){
+    // stepper.next();
+  }
+
+  public isLast(item){
+    if(item.childrens==null){
+      return true;
+    }else{
+      return false;
+    }
+  
+  }
+
+  public answerSubmit(node:TreeNode,islast:boolean){
     this.answerTree.push(node);
     this.currentNode = node;
-    if (!navigateLink) {
-      this.router.navigate(['/'+navigateLink],{
-        queryParams:{
-            answers:this.answerTree
-        }
-      })
+    if (!islast) {
+    
     }
   }
 

@@ -1,8 +1,6 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-
-      <ng-template matStepLabel>Fill out your name</ng-template>
-
+  <mat-step>
+    <ng-template matStepLabel>Ответьте на вопросы </ng-template>
         <div class="question-container">
           <ng-container >
                   <div class="question">
@@ -11,38 +9,60 @@
                   <div class="answers">
                   <div *ngFor="let item of currentNode.childrens ">
                       <div *ngIf="item.rule==null">
-                          <button class="button"  (click)="answerSubmit(item,null)"> Далее</button>
+                          <button class="button"  (click)="answerSubmit(item,item.childrens==null)"> Далее</button>
                       </div>
                       <div *ngIf="item.rule!=null">
-                          <button *ngIf="item.link!=undefined" class="button" (click)="answerSubmit(item,item.link)">{{item.rule}}</button>
-                          <button class="button" (click)="answerSubmit(item,null)">{{item.rule}}</button>
+                          
+                          <!-- <button *ngIf="item.childrens==null" class="button" (click)="answerSubmit(item,null)" mat-button matStepperNext>Переход к следующему шагу</button> -->
+                          <button  class="button" (click)="answerSubmit(item,null)">{{item.rule}}</button>
                       </div>
+                  </div>
+                  <div *ngIf="currentNode.childrens==null">
+                    <button class="button"    mat-button matStepperNext>Перейти к следующему щагу</button>
                   </div>
               </div>
           </ng-container>
-      </div>
-
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-
+        </div>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
+  <mat-step >
 
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+    <ng-template matStepLabel>Ответьте на вопросы 2 </ng-template>
+        <div class="question-container">
+          <ng-container >
+                  <div class="question">
+                  <h2> {{ currentNode.description }}</h2>
+                  </div>
+                  <div class="answers">
+                  <div *ngFor="let item of currentNode.childrens ">
+                      <div *ngIf="item.rule==null">
+                          <button class="button"  (click)="answerSubmit(item,item.childrens==null)"> Далее</button>
+                      </div>
+                      <div *ngIf="item.rule!=null">
+                          
+                          <!-- <button *ngIf="item.childrens==null" class="button" (click)="answerSubmit(item,null)" mat-button matStepperNext>Переход к следующему шагу</button> -->
+                          <button  class="button" (click)="answerSubmit(item,null)">{{item.rule}}</button>
+                      </div>
+                  </div>
+                  <button class="button"  mat-button matStepperPrevious>Назад</button>
+                  <button class="button"  *ngIf="currentNode.childrens==null"  mat-button matStepperNext>Перейти к следующему щагу</button>
+              </div>
+          </ng-container>
+        </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button class="button"  mat-button matStepperPrevious>Назад</button>
+      <button class="button"  mat-button mat-button matStepperNext>Перейти к следующему щагу</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button class="button"  mat-button matStepperPrevious>Back</button>
+      <button class="button"  mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
